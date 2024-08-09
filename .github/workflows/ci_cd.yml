@@ -97,8 +97,8 @@ jobs:
       - name: Download  Inventory
         uses: actions/download-artifact@v3
         with:
-          name: ansible-inventory
-
+          name: updated-inventory
+          
       - name: Checkout code
         uses: actions/checkout@v4
 
