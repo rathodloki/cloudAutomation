@@ -1,0 +1,42 @@
+# General
+*.log
+*.tmp
+*.swp
+*.swo
+.DS_Store
+Thumbs.db
+
+# Terraform
+*.tfstate
+*.tfstate.*
+*.tfvars
+.terraform/
+.terraform.lock.hcl
+terraform.tfstate
+terraform.tfstate.backup
+
+# Ansible
+*.retry
+ansible.cfg
+*.yml
+*.yaml
+
+# SSH keys
+.ssh/
+*.pem
+*.key
+
+# Environment Files
+.env
+.env.local
+.env.*.local
+
+# Python Bytecode
+*.pyc
+__pycache__/
+
+# Editor and OS specific files
+.vscode/
+.idea/
+*.sublime-workspace
+*.sublime-project
