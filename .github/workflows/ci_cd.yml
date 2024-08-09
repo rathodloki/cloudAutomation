@@ -41,6 +41,7 @@ jobs:
           echo "[web]" > ../ansible/inventory
           echo "public: $public_ip"
           echo "$public_ip ansible_user=ubuntu" >> ../ansible/inventory
+          cat ../ansible/inventory
         working-directory: ./terraform
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
@@ -98,7 +99,7 @@ jobs:
         uses: actions/download-artifact@v3
         with:
           name: updated-inventory
-          
+
       - name: Checkout code
         uses: actions/checkout@v4
 
