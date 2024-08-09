@@ -46,6 +46,12 @@ jobs:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
 
+      - name: Upload Updated Inventory File
+        uses: actions/upload-artifact@v3
+        with:
+          name: updated-inventory
+          path: ansible/inventory
+
       - name: Upload Terraform State
         uses: actions/upload-artifact@v3
         with:
@@ -88,10 +94,10 @@ jobs:
     needs: [terraform]
     if: ${{ needs.terraform.result == 'success' }}
     steps:
-      - name: Download Terraform State
+      - name: Download  Inventory
         uses: actions/download-artifact@v3
         with:
-          name: terraform-state
+          name: ansible-inventory
 
       - name: Checkout code
         uses: actions/checkout@v4
@@ -99,8 +105,8 @@ jobs:
       - name: Run Ansible Playbook
         id: ansible
         run: |
-          cat ansible/inventory ansible/playbook.yml
-          ls -la
+          cat ansible/inventory
+          ls -la ansible
 
       - name: Check for No Hosts Matched
         run: |
