@@ -102,6 +102,7 @@ jobs:
       - name: Run Ansible Playbook
         id: ansible
         run: |
+          ls -la
           cat ansible/inventory
           ansible-playbook -i ansible/inventory ansible/playbook.yml
 
