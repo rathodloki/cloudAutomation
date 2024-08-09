@@ -34,23 +34,16 @@ jobs:
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+
+      - name: Get Public IP from Terraform
+        run: |
+          public_ip=$(terraform output -raw public_ip);echo "PUBLIC_IP=$public_ip";echo "[web]" > ansible/inventory;echo "$PUBLIC_IP ansible_user=ubuntu >> ansible/inventory
         
       - name: Upload Terraform State
         uses: actions/upload-artifact@v3
         with:
           name: terraform-state
           path: terraform
-
-      - name: Get Public IP from Terraform
-        run: |
-         {
-            public_ip=$(terraform output -raw public_ip);echo "PUBLIC_IP=$public_ip" 
-         } >> ${GITHUB_ENV}
-        
-      - name: Update Ansible Inventory
-        run: |
-          echo "[web]" > ansible/inventory
-          echo "$PUBLIC_IP ansible_user=ubuntu >> ansible/inventory
 
   cleanup:
     runs-on: ubuntu-latest
