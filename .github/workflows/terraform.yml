@@ -43,7 +43,9 @@ jobs:
 
       - name: Get Public IP from Terraform
         run: |
-            public_ip=$(terraform output -raw public_ip);echo "PUBLIC_IP=$public_ip" >> ${GITHUB_ENV}
+         {
+            public_ip=$(terraform output -raw public_ip);echo "PUBLIC_IP=$public_ip" 
+         } >> ${GITHUB_ENV}
         
       - name: Update Ansible Inventory
         run: |
