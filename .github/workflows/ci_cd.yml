@@ -91,11 +91,27 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Install Ansible
-        run: sudo apt-get install -y ansible
-
       - name: Run Ansible Playbook
-        run: ansible-playbook -i ansible/inventory ansible/playbook.yml
+        id: ansible
+        run: |
+          ansible-playbook -i ansible/inventory ansible/playbook.yml || {
+            echo "Ansible playbook failed."
+            exit 1
+          }
+
+      - name: Check for No Hosts Matched
+        run: |
+          if grep -q "No hosts matched" ansible/playbook.log; then
+            echo "No hosts matched. Marking job as failed."
+            exit 1
+          fi
+        continue-on-error: true
+        id: check-hosts
+
+      - name: Display Ansible Playbook Output
+        if: ${{ steps.ansible.outcome == 'failure' }}
+        run: cat ansible/playbook.log
+
         env:
           ANSIBLE_HOST_KEY_CHECKING: 'False'
           ANSIBLE_PRIVATE_KEY_FILE: ${{ secrets.SSH_PRIVATE_KEY }}
