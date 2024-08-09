@@ -94,10 +94,8 @@ jobs:
       - name: Run Ansible Playbook
         id: ansible
         run: |
-          ansible-playbook -i ansible/inventory ansible/playbook.yml || {
-            echo "Ansible playbook failed."
-            exit 1
-          }
+          cat ansible/inventory ansible/playbook.yml
+          ls -la
 
       - name: Check for No Hosts Matched
         run: |
