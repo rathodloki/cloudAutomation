@@ -56,7 +56,9 @@ resource "aws_security_group" "web_server" {
 
 resource "aws_key_pair" "deployer" {
   key_name   = "my-key-pair"
-  public_key = file("~/.ssh/my-key-pair.pub")
+  public_key = <<EOF
+ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDiS57b4zW9nYa5Fm1DSRIA+naRzL8ign+SdNBSNljhqsVzeGZVodI2LDqZJ7BcVN8vJVsp/QbiDp3LDuB8l3nvyzsZ6D5PWCDwdPuhlpZ4QDA1TV5QNw53KAD3riq98X6QtBftM1xVVJy/ja0m1FSoRr6kaPqd0F+bXH6tUPJhlDqE1KeW/77F9YWoHhAUQbf3WZH9P7t1xL6bKeopWKgXdHZYfCEWQd7e6Ob48G0ygZF0YPdsLc9ExgOn63vqi33+EtMd9/sxZQxjR03wXwjyZYpwfh5n4YcwydvspKKIIsH1juypZPQuLY5A5zF/zItuG1t84fnSL/4R2qd9Y35DOwMpe+cRWWHUptu4SMhtL3fK5IsY2UxrVVf7wuERWdf/MySm4NEpC0oXvxbFDRBj0CHSs+SVauuv64s2CimDRnGDTVF3BYdiZ9DLsd9E2dfEgU9yzB4ZmZRzNL96Jes852QWuC+sxfLcSw1gwF1+4DYyVkeCZ3JDJXtZ90+E3qE= lokendar@Lokendars-MacBook-Air.local 
+EOF
 }
 
 
