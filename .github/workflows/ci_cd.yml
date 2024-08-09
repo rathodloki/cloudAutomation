@@ -41,6 +41,7 @@ jobs:
           echo "[web]" > ansible/inventory
           echo "public: $public_ip"
           echo "$public_ip ansible_user=ubuntu" >> ansible/inventory
+        working-directory: ./terraform
 
       - name: Upload Terraform State
         uses: actions/upload-artifact@v3
