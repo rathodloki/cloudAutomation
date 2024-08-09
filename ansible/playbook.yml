@@ -1,0 +1,18 @@
+---
+- hosts: web
+  become: yes
+  tasks:
+    - name: Install Nginx
+      apt:
+        name: nginx
+        state: present
+
+    - name: Copy web application files
+      copy:
+        src: ../app/
+        dest: /var/www/html/
+    
+    - name: Ensure Nginx is running
+      service:
+        name: nginx
+        state: started

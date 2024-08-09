@@ -23,17 +23,22 @@ jobs:
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
 
       - name: Terraform Apply
-        run: terraform apply -auto-approve
+        run: |
+          set -e
+          terraform apply -auto-approve || {
+          echo "Terraform apply failed. Running destroy..."
+          terraform destroy -auto-approve
+          exit 1
+          } 
         working-directory: ./terraform
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
 
       - name: Get Public IP from Terraform
-        id: terraform
         run: |
           public_ip=$(terraform output -raw public_ip)
-          echo "PUBLIC_IP=$public_ip" >> $GITHUB_ENV
+          echo "PUBLIC_IP=$public_ip" >> ${GITHUB_STATE}
 
       - name: Update Ansible Inventory
         run: |

@@ -1,32 +1,31 @@
-# General
+# Log files
 *.log
+
+# Temporary files
 *.tmp
 *.swp
 *.swo
+
+# macOS specific files
 .DS_Store
+
+# Windows specific files
 Thumbs.db
 
 # Terraform
 *.tfstate
 *.tfstate.*
-*.tfvars
 .terraform/
 .terraform.lock.hcl
-terraform.tfstate
-terraform.tfstate.backup
 
-# Ansible
+# Ansible (only ignore retry files)
 *.retry
-ansible.cfg
-*.yml
-*.yaml
 
-# SSH keys
-.ssh/
+# SSH keys (only ignore keys, not the entire directory)
 *.pem
 *.key
 
-# Environment Files
+# Environment files (commonly sensitive, so they should remain ignored)
 .env
 .env.local
 .env.*.local
@@ -35,7 +34,7 @@ ansible.cfg
 *.pyc
 __pycache__/
 
-# Editor and OS specific files
+# Editor-specific files
 .vscode/
 .idea/
 *.sublime-workspace
