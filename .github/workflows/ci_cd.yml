@@ -80,7 +80,7 @@ jobs:
 
   ansible:
     runs-on: ubuntu-latest
-    needs: [terraform, cleanup]
+    needs: [terraform]
     if: ${{ needs.terraform.result == 'success' && needs.cleanup.result == 'success' }}
     steps:
       - name: Download Terraform State
