@@ -81,7 +81,7 @@ jobs:
   ansible:
     runs-on: ubuntu-latest
     needs: [terraform]
-    if: ${{ needs.terraform.result == 'success' && needs.cleanup.result == 'success' }}
+    if: ${{ needs.terraform.result == 'success' }}
     steps:
       - name: Download Terraform State
         uses: actions/download-artifact@v3
