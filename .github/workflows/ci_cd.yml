@@ -38,10 +38,8 @@ jobs:
       - name: Get Public IP from Terraform
         run: |
           public_ip=$(terraform output -raw public_ip)
-          echo "[web]" > ../ansible/inventory
-          echo "public: $public_ip"
-          echo "$public_ip ansible_user=ubuntu" >> ../ansible/inventory
-          cat ../ansible/inventory
+          echo "[web]" >> "$GITHUB_OUTPUT"
+          echo "${public_ip} ansible_user=ubuntu" >> "$GITHUB_OUTPUT"
         working-directory: ./terraform
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
@@ -96,8 +94,10 @@ jobs:
       - name: Run Ansible Playbook
         id: ansible
         run: |
+          echo ${{needs.terraform.outputs.output1}} > ansible/inventory
+          echo ${{needs.terraform.outputs.output2}} >> ansible/inventory
           cat ansible/inventory
-          ls -la ansible
+          ansible-playbook -i ansible/inventory ansible/playbook.yml
 
       - name: Check for No Hosts Matched
         run: |
