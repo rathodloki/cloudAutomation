@@ -37,7 +37,9 @@ jobs:
 
       - name: Get Public IP from Terraform
         run: |
-          public_ip=$(terraform output -raw public_ip);echo "[web]" > ansible/inventory;echo "$public_ip ansible_user=ubuntu >> ansible/inventory
+          public_ip=$(terraform output -raw public_ip)
+          echo "[web]" > ansible/inventory
+          echo "$public_ip ansible_user=ubuntu" >> ansible/inventory
         
       - name: Upload Terraform State
         uses: actions/upload-artifact@v3
