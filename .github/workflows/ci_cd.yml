@@ -38,7 +38,7 @@ jobs:
       - name: Get Public IP from Terraform
         run: |
             echo "[web]" > ../ansible/inventory
-            public_ip=$(terraform output -raw public_ip | awk '/^[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+$/ {print $1}')
+            public_ip=$(terraform output -no-color public_ip | awk '/^[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+$/ {print $1}')
             echo "$public_ip ansible_user=ubuntu" >> ../ansible/inventory
         working-directory: ./terraform
         env:
