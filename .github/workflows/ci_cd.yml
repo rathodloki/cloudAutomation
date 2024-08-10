@@ -105,8 +105,9 @@ jobs:
       - name: Run Ansible Playbook
         id: ansible
         run: |
-          echo ${ANSIBLE_PRIVATE_KEY_FILE}
-          echo "------------------------------------------"
+          echo ${ANSIBLE_PRIVATE_KEY_FILE} >> temp.txt
+          echo "========================================"
+          cat temp.txt
           ansible-playbook -i inventory playbook.yml
         env:
           ANSIBLE_HOST_KEY_CHECKING: 'False'
