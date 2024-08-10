@@ -101,14 +101,17 @@ jobs:
         uses: actions/download-artifact@v3
         with:
           name: ansible-artifact
+      
+      - name: Setup SSH Key
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
 
       - name: Run Ansible Playbook
         id: ansible
         run: |
-          echo ${ANSIBLE_PRIVATE_KEY_FILE} >> temp.txt
-          echo "========================================"
-          cat temp.txt
           ansible-playbook -i inventory playbook.yml
         env:
           ANSIBLE_HOST_KEY_CHECKING: 'False'
-          ANSIBLE_PRIVATE_KEY_FILE: ${{ secrets.SSH_PRIVATE_KEY }}
+          ANSIBLE_PRIVATE_KEY_FILE: '~/.ssh/id_rsa'
