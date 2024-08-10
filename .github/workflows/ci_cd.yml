@@ -113,9 +113,6 @@ jobs:
       - name: Run Ansible Playbook
         id: ansible
         run: |
-          ls -la
-          echo "----------------------"
-          ls -la ../
           ansible-playbook -i inventory playbook.yml
         env:
           ANSIBLE_HOST_KEY_CHECKING: 'False'
