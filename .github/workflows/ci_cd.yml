@@ -96,6 +96,8 @@ jobs:
     needs: [terraform]
     if: ${{ needs.terraform.result == 'success' }}
     steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
 
       - name: Download ansible artifact
         uses: actions/download-artifact@v3
