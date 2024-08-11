@@ -3,10 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Welcome</title>
+    <title>Quote</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@700&display=swap');
-
         body {
             margin: 0;
             padding: 0;
@@ -14,47 +12,68 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            overflow: hidden;
-            font-family: 'Roboto', sans-serif;
+            background-color: #000;
             color: #fff;
-            background: #000;
-            /* Animated Background */
-            background: linear-gradient(-45deg, #ff6b6b, #f7d794, #4ecdc4, #556270);
-            background-size: 400% 400%;
-            animation: gradientAnimation 15s ease infinite;
+            font-family: Arial, sans-serif;
         }
 
-        @keyframes gradientAnimation {
-            0% { background-position: 0% 0%; }
-            50% { background-position: 100% 100%; }
-            100% { background-position: 0% 0%; }
+        .container {
+            text-align: left;
+            max-width: 600px;
         }
 
-        .glass {
-            position: relative;
-            width: 80%;
-            height: 60%;
-            backdrop-filter: blur(10px);
-            background: rgba(255, 255, 255, 0.15);
-            border-radius: 15px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        .quote {
+            font-size: 2rem;
+            line-height: 0.5;
+            margin-bottom: 1rem;
+        }
+        .quote p:nth-of-type(2){
+            font-style: italic;
+            color: #aaa;
         }
 
-        .welcome-text {
-            font-size: 3rem;
-            text-align: center;
-            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+        .author {
+            font-size: 1rem;
+            color: #aaa;
+            text-align: right;
         }
+
+        footer {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        background-color: #333;
+        color: #fff;
+        padding: 10px;
+        font-size: 0.875rem;
+        display: flex;
+        justify-content: space-between;
+        width: 98.5%;
+        }   
+
+        footer p {
+            margin: 0;
+        }
+
+        footer a {
+            color: #fff;
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            color: #007bff;
+        }
+
     </style>
 </head>
 <body>
-    <div class="glass">
-        <div class="welcome-text">
-            Welcome!
-        </div>
+    <div class="container">
+        <div class="quote"><p>The time you enjoy wasting,</p><p>Is not time wasted.</p></div>
+        <div class="author">- Bertrand Russell</div>
     </div>
+    <footer>
+        <p>Welcome to the page</p>
+        <a href="https://github.com/rathodloki" target="_blank">Know me 👋🏻</a>
+    </footer>
 </body>
 </html>
